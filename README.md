@@ -23,9 +23,9 @@ The data and layout layers used in this card are digitized directly from the phy
 
 ### Method 1: Direct 1-Click HACS Add
 
-If you have configured the "My Home Assistant" redirection service on your instance, click the badge below to add this repository to HACS instantly:
+If you have configured the "My Home Assistant" redirection service on your instance, click the badge below to open this repository inside HACS instantly:
 
-[![Open your Home Assistant instance and open a repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=https://github.com/connorlorente/ha-baby-temp-card&category=frontend)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=connorlorente&repository=ha-baby-temp-card&category=plugin)
 
 ### Method 2: Manual Custom Repository Add in HACS
 
@@ -60,8 +60,8 @@ entity: sensor.nursery_temperature
 show_full_guide: false
 show_slider: true
 user_toggle_full_view: true
-```
 
 ## Disclaimer
 
 This custom card is an execution aid based specifically on the physical reference card from sweetdreams.co.uk. Please be aware that very little testing has been done on this codebase. You should thoroughly test the card yourself and use it in close correlation with other reliable room temperature sources. Furthermore, baby clothing and safe temperature guidelines vary globally. You must perform your own independent checks to verify these suggested clothing ranges against the official safe sleep advice recommended by healthcare authorities in your specific region.
+```
