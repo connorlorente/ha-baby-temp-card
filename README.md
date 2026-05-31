@@ -4,6 +4,13 @@ An interactive Home Assistant Lovelace card designed to help parents maintain a 
 
 This card monitors your nursery's temperature sensor and provides instant, clear visual cues on exactly how to dress your baby using the correct clothing layers and sleep bag Tog ratings.
 
+## Previews
+
+<p align="center">
+  <img src="images/rm_full-view.jpg" alt="Baby Room Guide Full Chart View" width="400" style="border-radius: 8px;"/>
+  <img src="images/rm_widget-view.jpg" alt="Baby Room Guide Widget View" width="400" style="border-radius: 8px; margin-right: 10px;"/>
+</p>
+
 ## Origin & Credits
 
 The data and layout layers used in this card are digitized directly from the physical reference card included with baby sleep products from **sweetdreams.co.uk**.
