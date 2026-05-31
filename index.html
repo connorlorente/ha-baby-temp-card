@@ -1,0 +1,170 @@
+<!-- Used to develop and test the Baby Room Guide card in a standalone environment. This file includes a mock Home Assistant sensor, controls to adjust the sensor value and card settings, and an area to display any errors that occur during development. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baby Room Guide Dev Sandbox</title>
+
+    <script type="module" src="./baby-room-guide-card.js"></script>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #e5e5e5;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .dev-tools {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      #card-container {
+        width: 100%;
+        max-width: 450px;
+      }
+      input[type="range"] {
+        width: 100%;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+      .temp-display {
+        font-size: 2em;
+        font-weight: bold;
+        color: #333;
+      }
+      .controls-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+      }
+      .toggle-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .toggle-label {
+        font-size: 0.9em;
+        font-weight: bold;
+        color: #555;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 8px;
+      }
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      #error-out {
+        color: red;
+        font-weight: bold;
+        margin-top: 15px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dev-tools">
+      <h3>Mock HA Sensor</h3>
+      <span class="temp-display" id="temp-display">20.0</span>
+      <span style="font-size: 1.5em; font-weight: bold; color: #555">°C</span
+      ><br />
+      <input
+        type="range"
+        id="temp-slider"
+        min="10"
+        max="32"
+        step="0.1"
+        value="20"
+      />
+
+      <div class="controls-row">
+        <div class="toggle-group">
+          <label class="toggle-label"
+            ><input type="checkbox" id="mode-toggle" /> Default to Full
+            Guide</label
+          >
+          <label class="toggle-label"
+            ><input type="checkbox" id="slider-toggle" checked /> Enable Drag
+            Slider</label
+          >
+          <label class="toggle-label"
+            ><input type="checkbox" id="user-toggle-toggle" checked /> Enable
+            Expand/Collapse Button</label
+          >
+        </div>
+      </div>
+
+      <div id="error-out"></div>
+    </div>
+
+    <div id="card-container">
+      <baby-room-guide-card id="my-card"></baby-room-guide-card>
+    </div>
+
+    <script type="module">
+      const card = document.getElementById("my-card");
+      const slider = document.getElementById("temp-slider");
+      const display = document.getElementById("temp-display");
+      const errorOut = document.getElementById("error-out");
+      const modeToggle = document.getElementById("mode-toggle");
+      const sliderToggle = document.getElementById("slider-toggle");
+      const userToggleToggle = document.getElementById("user-toggle-toggle");
+
+      window.addEventListener("error", (event) => {
+        errorOut.innerText =
+          "Fatal Error: Check your .js file! " + event.message;
+      });
+
+      function applyCardState() {
+        if (!customElements.get("baby-room-guide-card")) return;
+
+        const tempVal = parseFloat(slider.value).toFixed(1);
+        display.innerText = tempVal;
+
+        try {
+          card.setConfig({
+            entity: "sensor.fake_nursery_temp",
+            show_full_guide: modeToggle.checked,
+            show_slider: sliderToggle.checked,
+            user_toggle_full_view: userToggleToggle.checked,
+          });
+
+          card.hass = {
+            states: { "sensor.fake_nursery_temp": { state: tempVal } },
+          };
+        } catch (err) {
+          errorOut.innerText = "Error updating card: " + err.message;
+        }
+      }
+
+      slider.addEventListener("input", applyCardState);
+      modeToggle.addEventListener("change", applyCardState);
+      sliderToggle.addEventListener("change", applyCardState);
+      userToggleToggle.addEventListener("change", applyCardState);
+
+      customElements
+        .whenDefined("baby-room-guide-card")
+        .then(() => {
+          applyCardState();
+        })
+        .catch((err) => {
+          errorOut.innerText = "Card failed to define: " + err;
+        });
+    </script>
+  </body>
+</html>
