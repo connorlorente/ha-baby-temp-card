@@ -7,8 +7,8 @@ This card monitors your nursery's temperature sensor and provides instant, clear
 ## Previews
 
 <p align="center">
-  <img src="images/rm_full-view.jpg" alt="Baby Room Guide Full Chart View" width="400" style="border-radius: 8px;"/>
-  <img src="images/rm_widget-view.jpg" alt="Baby Room Guide Widget View" width="400" style="border-radius: 8px; margin-right: 10px;"/>
+  <img src="https://raw.githubusercontent.com/connorlorente/ha-baby-temp-card/main/images/rm_full-view.jpg" alt="Baby Room Guide Full Chart View" width="400"/>
+  <img src="https://raw.githubusercontent.com/connorlorente/ha-baby-temp-card/main/images/rm_widget-view.jpg" alt="Baby Room Guide Widget View" width="400"/>
 </p>
 
 ## Origin & Credits
