@@ -2,7 +2,7 @@
 // CONFIGURATION FLAGS
 // ==============================================================================
 // Set to true for your index.html dev sandbox. Set to false before pushing to Home Assistant.
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 class BabyRoomGuideCard extends HTMLElement {
   constructor() {
