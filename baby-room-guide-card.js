@@ -1,3 +1,9 @@
+// ==============================================================================
+// CONFIGURATION FLAGS
+// ==============================================================================
+// Set to true for your index.html dev sandbox. Set to false before pushing to Home Assistant.
+const DEV_MODE = false;
+
 class BabyRoomGuideCard extends HTMLElement {
   constructor() {
     super();
@@ -184,11 +190,7 @@ class BabyRoomGuideCard extends HTMLElement {
       isPreviewing = true;
     }
 
-    const isLocal =
-      window.location.protocol === "file:" ||
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1";
-    const basePath = isLocal
+    const basePath = DEV_MODE
       ? "./images"
       : "/hacsfiles/baby-room-guide-card/images";
 
