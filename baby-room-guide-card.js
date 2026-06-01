@@ -2,7 +2,7 @@
 // CONFIGURATION FLAGS
 // ==============================================================================
 // Set to true for your index.html dev sandbox. Set to false before pushing to Home Assistant.
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 class BabyRoomGuideCard extends HTMLElement {
   constructor() {
@@ -24,6 +24,7 @@ class BabyRoomGuideCard extends HTMLElement {
     return {
       entity: "",
       show_full_guide: false,
+      show_scale: true,
       show_slider: true,
       user_toggle_full_view: true,
     };
@@ -167,6 +168,7 @@ class BabyRoomGuideCard extends HTMLElement {
       this._userToggledView !== null
         ? this._userToggledView
         : this.config.show_full_guide || false;
+    const showScale = this.config.show_scale !== false;
     const showSlider = this.config.show_slider !== false;
     const allowUserToggle = this.config.user_toggle_full_view !== false;
 
@@ -439,6 +441,7 @@ class BabyRoomGuideCard extends HTMLElement {
 
         .full-col-temp { width: 70px; font-weight: bold; font-size: 1.1em; text-align: center; padding-right: 10px; line-height: 1.2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .full-col-bag { width: 50px; display: flex; align-items: center; justify-content: center; margin-right: 10px; }
+        .full-col-bag .image-wrapper { height: 50px; } 
         .full-col-bag .item-img { height: 50px; filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.15)); }
         .full-col-bag .tog-overlay { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 0.7em; color: #fff; text-shadow: 0px 1px 2px rgba(0,0,0,0.5); }
         .full-col-desc { flex: 1; display: flex; flex-direction: column; justify-content: center; }
@@ -453,7 +456,7 @@ class BabyRoomGuideCard extends HTMLElement {
       </style>
       
       <div class="baby-guide ${viewModeClass} ${sliderClass}">
-        ${showFullGuide ? "" : `<div class="thermometer">${scaleHtml}</div>`}
+        ${showFullGuide || !showScale ? "" : `<div class="thermometer">${scaleHtml}</div>`}
         ${sliderHtml}
         ${infoPanelHtml}
       </div>
@@ -503,6 +506,7 @@ class BabyRoomGuideCardEditor extends HTMLElement {
       form.schema = [
         { name: "entity", selector: { entity: { domain: "sensor" } } },
         { name: "show_full_guide", selector: { boolean: {} } },
+        { name: "show_scale", selector: { boolean: {} } },
         { name: "show_slider", selector: { boolean: {} } },
         { name: "user_toggle_full_view", selector: { boolean: {} } },
       ];
@@ -510,6 +514,7 @@ class BabyRoomGuideCardEditor extends HTMLElement {
         const labels = {
           entity: "Temperature Sensor",
           show_full_guide: "Default to Full Guide View",
+          show_scale: "Enable Temperature Scale",
           show_slider: "Enable Drag Slider Preview",
           user_toggle_full_view: "Enable Expand/Collapse Button",
         };

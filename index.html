@@ -1,4 +1,3 @@
-<!-- Used to develop and test the Baby Room Guide card in a standalone environment. This file includes a mock Home Assistant sensor, controls to adjust the sensor value and card settings, and an area to display any errors that occur during development. -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -99,6 +98,10 @@
             Guide</label
           >
           <label class="toggle-label"
+            ><input type="checkbox" id="scale-toggle" checked /> Enable
+            Temperature Scale</label
+          >
+          <label class="toggle-label"
             ><input type="checkbox" id="slider-toggle" checked /> Enable Drag
             Slider</label
           >
@@ -122,6 +125,7 @@
       const display = document.getElementById("temp-display");
       const errorOut = document.getElementById("error-out");
       const modeToggle = document.getElementById("mode-toggle");
+      const scaleToggle = document.getElementById("scale-toggle");
       const sliderToggle = document.getElementById("slider-toggle");
       const userToggleToggle = document.getElementById("user-toggle-toggle");
 
@@ -140,6 +144,7 @@
           card.setConfig({
             entity: "sensor.fake_nursery_temp",
             show_full_guide: modeToggle.checked,
+            show_scale: scaleToggle.checked,
             show_slider: sliderToggle.checked,
             user_toggle_full_view: userToggleToggle.checked,
           });
@@ -154,6 +159,7 @@
 
       slider.addEventListener("input", applyCardState);
       modeToggle.addEventListener("change", applyCardState);
+      scaleToggle.addEventListener("change", applyCardState);
       sliderToggle.addEventListener("change", applyCardState);
       userToggleToggle.addEventListener("change", applyCardState);
 
