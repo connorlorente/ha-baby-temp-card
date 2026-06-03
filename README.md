@@ -13,7 +13,7 @@ This card monitors your nursery's temperature sensor and provides instant, clear
 
 ## Origin & Credits
 
-The data and layout layers used in this card are digitized directly from the physical reference card included with baby sleep products from [**sweetdreams.co.uk**](http://sweetdreamers.co.uk/).
+The data and layout layers used in this card are digitized directly from the physical reference card included with baby sleep products from [**sweetdreamers.co.uk**](http://sweetdreamers.co.uk/).
 
 ---
 
